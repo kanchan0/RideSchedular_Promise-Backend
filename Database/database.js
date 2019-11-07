@@ -1,11 +1,12 @@
 const Bluebird = require("bluebird");
 const mySQL = require("mysql");
+const config = require("../config/keys")
 
 const connection = mySQL.createConnection({
     host:"localhost",
     user:"root",
-    password:"New@12345",
-    database:"user",
+    password:config.db_password,
+    database:config.database_name,
     });
     
  connection.connect(function(err){

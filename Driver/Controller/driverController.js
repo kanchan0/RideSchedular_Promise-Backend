@@ -6,9 +6,13 @@ const joi               =   require("../../Driver/Validator/driverValidator")
 const signUpPage = (req) => {
    return new Promise((resolve,reject)=>{
         Promise.coroutine(function* (){
-        
             
             const {name,email,password,phone,age,address}=req.body;
+            if(name===undefined||email===undefined||password===undefined||phone===undefined||age===undefined||address===undefined){
+                resolve({status:false,Error_message:"Required fields are null"});
+                return
+            }
+
             const driverData={
                 name,
                 email,
@@ -47,6 +51,10 @@ const login = (req)=> {
                 let phone       =   req.body.phone;
                 let password    =   req.body.password
     
+                if(password===undefined||phone===undefined){
+                    resolve({status:false,Error_message:"Required fields are null"});
+                    return
+                }
                 const user = yield driverServices.Authorization_For_phone(phone)
 
                 if(user.length ===0){

@@ -6,10 +6,14 @@ const joi               =   require("../Validator/userValidator")
 const signUpPage = (req) => {
    return new Promise((resolve,reject)=>{
         Promise.coroutine(function* (){
-        
             const { name, email, password, phone } = req.body;
-            const userData = { name, email, password, phone }  
 
+            if(name===undefined||email===undefined||password===undefined||phone===undefined){
+                resolve({status:false,Error_mesage:"Required fields are empty"});
+                return 
+            }
+
+            const userData = { name, email, password, phone } 
             const {error}=joi.validateUser(userData);
  
             if(error){  
@@ -40,6 +44,11 @@ const login = (req)=> {
                 let phone       =   req.body.phone;
                 let password    =   req.body.password
     
+                if(password===undefined||phone===undefined){
+                    resolve({status:false,Error_mesage:"Required fields are empty"});
+                    return 
+                }
+
                 const user = yield userServices.Authorization_For_phone(phone)
 
                 if(user.length ===0){
@@ -75,6 +84,11 @@ const createbooking = (req)=>{
     return new Promise((resolve,reject)=>{
         Promise.coroutine(function* (){
             const {date_time,source,destination,location,phone,job_token}=req.body;
+            if(date_time===undefined||source===undefined||destination===undefined||location===undefined||phone===undefined||job_token===undefined){
+                resolve({status:false,Error_mesage:"Required fields are empty"});
+                return 
+            }
+
             let RideData={
                 
                 date_time,
