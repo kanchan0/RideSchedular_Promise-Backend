@@ -17,7 +17,7 @@
     "fcm-node": "^1.5.2",
     "firebase-admin": "^8.5.0",
     "joi": "^14.3.1",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "mongoose": "^5.7.8",
     "mysql": "^2.17.1",
     "node-cron": "^2.0.3",
